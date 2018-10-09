@@ -1,0 +1,15 @@
+<div class="container pt-5">
+  <mdb-card>
+    <mdb-card-header class="peach-grad white-text text-center">
+      ELIMINAR CATEGORÍA
+    </mdb-card-header>
+    <mdb-card-body>
+      <div class="text-center">
+        <mdb-card-title>¿Está seguro de que desea eliminar la categoría?</mdb-card-title>
+        <mdb-card-text>Si eliminar la categoría perderá todos los períodos temporales asociados a ella.</mdb-card-text>
+        <a mdbBtn color="secondary" class="waves-light mt-2 rounded success-grad" [routerLink]="['/herramientas']" mdbWavesEffect>Volver</a>
+        <a mdbBtn (click)="eliminar()" mdbBtn color="danger" class="waves-light mt-2 rounded danger-grad" mdbWavesEffect>Eliminar</a>
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+</div>

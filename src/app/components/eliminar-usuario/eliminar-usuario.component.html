@@ -1,0 +1,15 @@
+<div class="container pt-5">
+  <mdb-card>
+    <mdb-card-header class="peach-grad white-text text-center">
+      ELIMINAR USUARIO
+    </mdb-card-header>
+    <mdb-card-body>
+      <div class="text-center">
+        <mdb-card-title>¿Está seguro de que desea eliminar al usuario?</mdb-card-title>
+        <mdb-card-text>Está a punto de borrar al usuario de forma permanente.</mdb-card-text>
+        <a mdbBtn color="secondary" class="waves-light mt-2 rounded success-grad" [routerLink]="['/panelAdmin']" mdbWavesEffect>Volver</a>
+        <a mdbBtn (click)="eliminar()" mdbBtn color="danger" class="waves-light mt-2 rounded danger-grad" mdbWavesEffect>Eliminar</a>
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+</div>

@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+.form-size{
+    width: 400px;
+    height: 400px;
+}
+
+.carta{
+    height: 400px;
+}
+
+.button-size{
+    width: 300px;
+    height: 200px;
+}
+
+.regist-top{
+    margin-top: 50px !important;
+}
+
+.form-control-feedback{
+    font-size: 12px;
+}
+
+body{
+    background-color:#fafafa;
+}
+
+.rounded{
+    border-radius: 10em !important;
+}
+
+.peach-grad{
+    background: linear-gradient(40deg,#ffd86f,#fc6262) !important;
+}
+
+.purple-grad{
+    background: linear-gradient(40deg,#ff6ec4,#7873f5) !important;
+}
+
+.aqua-grad{
+    background: linear-gradient(40deg,#2096ff,#05ffa3)  !important;
+}
+
+.success-grad{
+    background: linear-gradient(40deg, #00C851,#b2ff59) !important;
+}
+
+.danger-grad{
+    background: linear-gradient(40deg, #f44336, #e57373 ) !important;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 280px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }

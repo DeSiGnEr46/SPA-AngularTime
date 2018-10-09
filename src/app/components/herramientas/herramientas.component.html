@@ -1,0 +1,258 @@
+<div class="row" style="margin-right: 0px">
+
+  <!-- FORMULARIO PARA AÑADIR UNA CATEGORÍA -->
+  <div class="col-md-4">
+    <div class="container mt-2">
+      <div class="modal-dialog cascading-modal mt-5">
+        <!--Content-->
+        <div class="modal-content">
+          <!--Modal cascading tabs-->
+          <div class="modal-c-tabs">
+            <!-- Permite que el enlace sobresalga por encima del contenido -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-1" role="tablist">
+              <li class="nav-item purple accent-1" routerLinkActive="active">
+                <a class="nav-link white-text" [routerLink]="['/dashboard']" role="tab">
+                  <i class="fa fa-folder mr-1"></i> Categorias</a>
+              </li>
+            </ul>
+
+            <div class="tab-content" style="padding-top: 0.2rem;">
+              <!--Panel Añadir Categoría-->
+              <div class="tab-pane fade in show active" role="tabpanel">
+                <!--Formulario-->
+                <form [formGroup]="formCat" (ngSubmit)="addcat()">
+                  <div class="modal-body">
+                    <div class="md-form form-sm mb-3">
+                      <p class="card-title font-italic">Nueva categoría</p>
+                      <hr>
+                      <input type="text" class="form-control form-control-sm" placeholder="Introduzca una nueva categoría" formControlName="categoria">
+                      <!-- Errores de validación-->
+                      <div *ngIf="formCat.controls['categoria'].errors?.novacio && !formCat.controls['categoria'].pristine" class="form-control-feedback">
+                        El campo no puede estar vacío.
+                      </div>
+                      <div *ngIf="formCat.controls['categoria'].errors?.minlength" class="form-control-feedback">
+                        Longitud mínima ( {{ formCat.controls['categoria'].errors.minlength.requiredLength }} )
+                      </div>
+                      <div *ngIf="formCat.controls['categoria'].errors?.maxlength" class="form-control-feedback">
+                          Longitud máxima ( {{ formCat.controls['categoria'].errors.maxlength.requiredLength }} )
+                        </div>
+                      <div *ngIf="formCat.controls['categoria'].errors?.existe" class="form-control-feedback">
+                        Ya existe una categoría con este nombre.
+                      </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                      <button class="btn waves-light rounded purple-grad" type="submit" [disabled]="!formCat.valid" mdbWavesEffect>Añadir
+                        <i class="fa fa-sign-in ml-1"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <!--Footer-->
+                <div class="modal-body">
+                  <div class="options mt-1">
+                    <p class="font-italic">Mis categorias</p>
+                    <hr>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                      <thead>
+                        <tr>
+                          <th>Categoría</th>
+                          <th>Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody class="mt-1">
+                        <tr class="mt-1" *ngFor="let cat of categorias">
+                          <td scope="row">{{ cat.nombre }}</td>
+                          <td>
+                            <a class="btn text-white waves-light rounded danger-grad" [routerLink]="['/elcat', cat.nombre]" mdbWavesEffect>Eliminar</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!--Footer-->
+              </div>
+            </div>
+          </div>
+          <!--Contenido del panel-->
+        </div>
+      </div>
+      <!--Modals-->
+    </div>
+    <!--Container-->
+  </div>
+  <!--Columna-->
+
+  <!--FORMULARIO PARA CRONOMETRAR UNA TAREA-->
+  <div class="col-md-4">
+    <div class="container mt-2">
+      <div class="modal-dialog cascading-modal mt-5" role="document">
+        <!--Content-->
+        <div class="modal-content">
+          <!--Modal cascading tabs-->
+          <div class="modal-c-tabs">
+            <!-- Permite que el enlace sobresalga por encima del contenido -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-1" role="tablist">
+              <li class="nav-item green accent-2" routerLinkActive="active">
+                <a class="nav-link white-text" [routerLink]="['/login']" role="tab">
+                  <i class="fa fa-clock-o mr-1"></i> Cronometrar </a>
+              </li>
+            </ul>
+
+            <div class="tab-content" style="padding-top: 0.2rem;">
+              <!--Panel Añadir Categoría-->
+              <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                <!--Formulario-->
+                <form [formGroup]="formTime">
+                  <div class="modal-body">
+                    <div class="md-form form-sm mb-3">
+                      <p class="card-title font-italic">Elegir categoría</p>
+                      <hr>
+                      <select class="form-control form-control-sm" style="height: 34px;" formControlName="categoria">
+                        <option *ngFor="let cat of categorias" [value]="cat.nombre">{{ cat.nombre }}</option>
+                      </select>
+                    </div>
+
+                    <div class="text-center mt-2 d-inline">
+                      <div *ngIf="!activo" class="d-inline">
+                        <button class="btn rounded aqua-grad" (click)="iniciar()" type="submit" [disabled]="!formTime.valid">Iniciar
+                          <i class="fa fa-sign-in ml-1"></i>
+                        </button>
+                      </div>
+
+                      <div *ngIf="activo" class="d-inline">
+                        <button class="btn rounded peach-grad ml-1" (click)="actualizar()" type="submit">Actualizar
+                          <i class="fa fa-sign-in ml-1"></i>
+                        </button>
+                        <button class="btn rounded danger-grad ml-1" (click)="cancelar()" type="submit">Cancelar
+                          <i class="fa fa-sign-in ml-1"></i>
+                        </button>
+                        <button class="btn rounded success-grad ml-1" (click)="guardar()" type="submit">Guardar
+                          <i class="fa fa-sign-in ml-1"></i>
+                        </button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </form>
+
+                <!--Footer-->
+                <div class="modal-body">
+                  <div class="options mt-1" style="width: 100%">
+                    <p *ngIf="!activo" class="font-italic d-inline"> Cronómetro desactivado </p>
+                    <p *ngIf="activo" class="font-italic d-inline"> Cronómetro activo: <u> {{ actual }} {{ horas }}:{{ minutos }}:{{ segundos }} </u></p>
+                    <hr>
+                    <!-- Mensajes de confirmación/error -->
+                    <div class="green-text" *ngIf="autoOk">
+                      Los cambios se han guardado correctamente.
+                    </div>
+                    <div class="red-text" *ngIf="!autoOk && autoOk != null">
+                      Se ha producido un error en el servidor.
+                    </div>
+                  </div>
+                </div>
+                <!--Footer-->
+              </div>
+            </div>
+            <!--Contenido del panel-->
+          </div>
+        </div>
+      </div>
+      <!--Modals-->
+    </div>
+    <!--Container-->
+  </div>
+  <!--Columna-->
+
+  <!--FORMULARIO PARA AÑADIR MANUALMENTE UNA TAREA-->
+  <div class="col-md-4">
+    <div class="container mt-2">
+      <div class="modal-dialog cascading-modal mt-5" role="document">
+        <!--Content-->
+        <div class="modal-content">
+          <!--Modal cascading tabs-->
+          <div class="modal-c-tabs">
+            <!-- Permite que el enlace sobresalga por encima del contenido -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-1" role="tablist">
+              <li class="nav-item peach-grad accent-2" routerLinkActive="active">
+                <a class="nav-link white-text" [routerLink]="['/login']" role="tab">
+                  <i class="fa fa-clock-o mr-1"></i> Añadir manualmente </a>
+              </li>
+            </ul>
+
+            <div class="tab-content" style="padding-top: 0.2rem;">
+              <!--Panel Añadir Categoría-->
+              <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                <!--Formulario-->
+                <form [formGroup]="formMan">
+                  <div class="modal-body">
+                    <div class="md-form form-sm mb-3">
+                      <p class="card-title font-italic">Elegir categoría</p>
+                      <hr>
+                      <select class="form-control form-control-sm" style="height: 34px;" formControlName="categoria">
+                        <option *ngFor="let cat of categorias" [value]="cat.nombre">{{ cat.nombre }}</option>
+                      </select>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <input type="number" class="form-control form-control-sm" placeholder="horas" formControlName="horas">
+                        </div>
+                        <div class="col-md-4">
+                          <input type="number" class="form-control form-control-sm" placeholder="minutos" formControlName="min">
+                        </div>
+                        <div class="col-md-4">
+                          <input type="number" class="form-control form-control-sm" placeholder="segundos" formControlName="segs">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <select class="form-control form-control-sm" style="height: 34px;" formControlName="dia">
+                            <option *ngFor="let dia of dias" [value]="dia">{{ dia }}</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <select class="form-control form-control-sm" style="height: 34px;" formControlName="mes">
+                            <option *ngFor="let mes of meses" [value]="mes">{{ mes }}</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <select class="form-control form-control-sm" style="height: 34px;" formControlName="year">
+                            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                      <button class="btn rounded peach-grad ml-1" (click)="addtime()" type="submit" [disabled]="!formMan.valid">Añadir
+                        <i class="fa fa-sign-in ml-1"></i>
+                      </button>
+                      <!-- Mensajes de confirmación/error -->
+                      <div class="green-text" *ngIf="manOk">
+                        Los cambios se han guardado correctamente.
+                      </div>
+                      <div class="red-text" *ngIf="!manOk && manOk != null">
+                        Se ha producido un error en el servidor.
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!--Contenido del panel-->
+          </div>
+        </div>
+      </div>
+      <!--Modals-->
+    </div>
+    <!--Container-->
+  </div>
+  <!--Columna-->
+
+</div>

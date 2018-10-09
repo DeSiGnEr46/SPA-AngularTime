@@ -1,0 +1,123 @@
+<div *ngIf="!sesionActiva()">
+    <div class="view">
+        <img src="../../../assets/images/main-time.jpg" alt="TIME" class="img-fluid animated fadeIn" styles="max-width: 100%; height: auto">
+        <div class="mask flex-center rgba-purple-light" style="font-size: 2.5vw">
+            <p class="white-text">El tiempo es el bien más valioso que poseemos.</p>
+            <br>
+            <p class="white-text">¿Sabes sacarle provecho?</p>
+        </div>
+    </div>
+
+    <div class="row" style="margin-right: 0px;">
+        <div class="col-md-4">
+            <div class="card carta m-4 animated fadeIn">
+                <div class="view hm-white-slight waves-light" mdbWavesEffect>
+                    <img src="../../../assets/images/card-1.jpg" class="img-fluid" alt="Cronometra">
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <!--Title-->
+                    <h4 class="card-title">Gestiona tu tiempo</h4>
+                    <!--Text-->
+                    <p class="card-text">Gestiona el tiempo que dedicas a todas tus actividades diarias. Añade tus
+                        categorías
+                        personalizadas y comienza a cronometrar.
+                    </p>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+
+        <div class="col-md-4">
+            <div class="card carta m-4 animated fadeIn text-center">
+                <div class="view hm-white-slight waves-light" mdbWavesEffect>
+                    <img src="../../../assets/images/card-2.jpg" class="img-fluid" alt="Estadísticas">
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <!--Title-->
+                    <h4 class="card-title">Ve tus estadísticas</h4>
+                    <!--Text-->
+                    <p class="card-text">Lleva un control de tus registros con gráficas dinámicas.</p>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+
+        <div class="col-md-4">
+            <div class="card carta m-4 animated fadeIn">
+                <div class="view hm-white-slight waves-light" mdbWavesEffect>
+                    <img src="../../../assets/images/card-3.jpg" class="img-fluid" alt="Multidispositivo">
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">En cualquier dispositivo</h4>
+                        <!--Text-->
+                        <p class="card-text">Disfruta de la web en cualquiera de tus dispositivos.</p>
+                    </div>
+                </div>
+                <!--/.Card-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="sesionActiva()">
+    <div class="jumbotron mt-4" style="padding-top: 2rem">
+        <h2 class="h2-responsive">Resumen diario de actividad</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <mdb-card>
+                    <mdb-card-header class="aqua-grad white-text">
+                        <h3 class="h3-responsive">Registros añadidos</h3>
+                    </mdb-card-header>
+                    <mdb-card-body class="table-wrapper-scroll-y">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr *ngFor="let act of actividades; let i = index">
+                                    <td scope="row">
+                                        {{ act }} : {{ horas[i]}} horas {{ minutos[i] }} min
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a mdbBtn class="waves-light success-grad white-text rounded text-center" [routerLink]="['/herramientas']"
+                            mdbWavesEffect>Añadir
+                            más
+                        </a>
+                        <p class="font-italic"> Total diario: {{ totalh }} horas {{ totalm }} minutos.</p>
+                    </mdb-card-body>
+                </mdb-card>
+            </div> <!-- Cierre de col-md-4 -->
+
+            <div class="col-md-8">
+                <div style="display: block;">
+                    <canvas baseChart width="350" height="200" [datasets]="lineChartData" [labels]="lineChartLabels"
+                        [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+                        (chartHover)="chartHovered($event)">
+                    </canvas>
+                </div>
+            </div><!-- Cierre de col-md-4 -->
+        </div> <!-- Cierre de la fila-->
+
+        <div class="row mt-3" *ngIf="cronActivo">
+            <div class="col-md-12">
+                <mdb-card>
+                    <mdb-card-header class="purple-grad white-text">
+                        <h3 class="h3-responsive">Cronómetro activo</h3>
+                    </mdb-card-header>
+                    <mdb-card-body class="table-wrapper-scroll-y">
+                        Hace {{ horasActiva }} horas y {{ minActiva}} minutos activó un cronómetro para la tarea " {{
+                        actividadActiva }} "
+                        <a type="button" mdbBtn class="rounded peach-grad" [routerLink]="['/herramientas']"
+                            mdbWavesEffect>Ir
+                            a Herramientas
+                        </a>
+                    </mdb-card-body>
+                </mdb-card>
+            </div>
+        </div>
+
+    </div>
+</div>

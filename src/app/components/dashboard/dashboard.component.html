@@ -1,0 +1,132 @@
+<div class="container">
+  <div class="row mt-3">
+
+    <div class="col-md-6">
+      <h3 class="text-center h3-responsive">Total de horas dedicadas a cada actividad</h3>
+      <div style="display: block;">
+        <canvas baseChart width="400" height="400" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+          [colors]="barChartColors" [chartType]="'bar'">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="text-center h3-responsive">Porcentaje dedicado a cada actividad</h3>
+      <div style="display: block">
+        <canvas baseChart width="380" height="380" [data]="doughnutChartData" [labels]="doughnutChartLabels" [options]="barChartOptions"
+          [colors]="doughnutChartColors" [chartType]="doughnutChartType">
+        </canvas>
+      </div>
+    </div>
+
+  </div><!-- Cierre de la fila-->
+  <hr>
+
+  <div class="row mt-5">
+
+    <div class="col-md-4">
+      <!-- FORMULARIO DE FILTROS -->
+      <h3 class="text-center h3-responsive">Registro de actividades</h3>
+      <div class="container mt-2">
+        <div class="modal-dialog cascading-modal mt-5">
+          <!--Content-->
+          <div class="modal-content">
+            <!--Modal cascading tabs-->
+            <div class="modal-c-tabs">
+              <!-- Permite que el enlace sobresalga por encima del contenido -->
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs tabs-1" role="tablist">
+                <li class="nav-item purple accent-1" routerLinkActive="active">
+                  <a class="nav-link white-text" [routerLink]="['/dashboard']" role="tab">
+                    <i class="fa fa-folder mr-1"></i> Filtros</a>
+                </li>
+              </ul>
+
+              <div class="tab-content" style="padding-top: 0.2rem;">
+                <!--Panel Añadir Categoría-->
+                <div class="tab-pane fade in show active" role="tabpanel">
+                  <!--Formulario para filtrar por año-->
+                  <form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
+                    <div class="modal-body">
+                      <div class="md-form form-sm mb-3">
+                        <p class="card-title font-italic">Fecha de inicio - Fecha de fin</p>
+                        <hr>
+
+                        <p class="font-italic">Año</p>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <select class="form-control form-control-sm" formControlName="year">
+                              <option *ngFor="let year of years" [value]="year"> {{ year }} </option>
+                            </select>
+                          </div>
+                          <div class="col-md-6">
+                            <select class="form-control form-control-sm" formControlName="year2">
+                              <option *ngFor="let year of years" [value]="year"> {{ year }} </option>
+                            </select>
+                          </div>
+                        </div>
+
+
+                        <p class="font-italic">Mes</p>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <select style="height: 34px;" class="form-control form-control-sm"
+                              formControlName="mes">
+                              <option *ngFor="let mes of meses" [value]="mes"> {{ mes }} </option>
+                            </select>
+                          </div>
+                          <div class="col-md-6">
+                            <select style="height: 34px;" class="form-control form-control-sm"
+                              formControlName="mes2">
+                              <option *ngFor="let mes of meses" [value]="mes"> {{ mes }} </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <p class="font-italic">Día</p>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <select class="form-control form-control-sm" style="height: 34px;" formControlName="dia">
+                              <option *ngFor="let dia of dias" [value]="dia"> {{ dia }} </option>
+                            </select>
+                          </div>
+                          <div class="col-md-6">
+                              <select class="form-control form-control-sm" style="height: 34px;" formControlName="dia2">
+                                <option *ngFor="let dia of dias" [value]="dia"> {{ dia }} </option>
+                              </select>
+                            </div>
+                        </div>
+
+                      </div>
+
+                      <div class="text-center mt-2">
+                        <button class="btn waves-light rounded purple-grad" type="submit" [disabled]="!filtroForm.valid"
+                          mdbWavesEffect>Filtrar
+                          <i class="fa fa-sign-in ml-1"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!--Contenido del panel-->
+          </div>
+        </div>
+        <!--Modals-->
+      </div>
+    </div>
+    <!-- Cierre de la columna -->
+
+    <div class="col-md-8">
+      <div style="display: block;">
+        <canvas baseChart width="350" height="350" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+          [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <!-- Cierre de la fila -->
+
+</div>
+<!-- Cierre del container -->

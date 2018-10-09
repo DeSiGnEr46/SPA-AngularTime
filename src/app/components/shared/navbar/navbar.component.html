@@ -1,0 +1,46 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark purple-grad darken-2" [containerInside]="false">
+    <!-- Navbar brand -->
+    <logo>
+        <a class="navbar-brand" [routerLink]="['/home']">TIME</a>
+    </logo>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" routerLinkActive="active">
+                <a class="nav-link waves-light" [routerLink]="['/home']" mdbRippleRadius>Home</a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="sesionActiva()" class="nav-link waves-light" [routerLink]="['/dashboard']" mdbRippleRadius>Dashboard</a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="sesionActiva()" class="nav-link waves-light" [routerLink]="['/herramientas']" mdbRippleRadius>Herramientas</a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="sesionActiva()" class="nav-link waves-light" [routerLink]="['/perfil']" mdbRippleRadius>Perfil</a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="sesionActiva() && esAdmin()" class="nav-link waves-light" [routerLink]="['/panelAdmin']" mdbRippleRadius>Panel de Administración</a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="!sesionActiva()" class="nav-link waves-light" [routerLink]="['/login']" mdbRippleRadius>Iniciar Sesión</a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="sesionActiva()" class="nav-link waves-light" (click)="desconectarse()" mdbRippleRadius>Desconectarse</a>
+            </li>
+        </ul>
+        <!-- Links -->
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
