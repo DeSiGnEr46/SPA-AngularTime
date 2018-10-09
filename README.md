@@ -1,10 +1,11 @@
 # Time
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.0.
+This project was developed as part of my final year project at college. I uploaded it as a backup copy and also so everyone can use it to have a complex example of an Angular project. Is is FORBIDDEN to use this project for commercial purposes.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve --aot` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
